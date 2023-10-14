@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bidding System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        #resultMessage {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bidding System</h1>
+        <p>Enter your name and bid amount:</p>
+        <input type="text" id="nameInput" placeholder="Your Name">
+        <input type="number" id="bidInput" placeholder="Bid Amount">
+        <button id="placeBidButton">Place Bid</button>
+        <p id="resultMessage"></p>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const nameInput = document.getElementById("nameInput");
+            const bidInput = document.getElementById("bidInput");
+            const placeBidButton = document.getElementById("placeBidButton");
+            const resultMessage = document.getElementById("resultMessage");
+
+            let highestBid = 0;
+            let winningBidder = "";
+
+            placeBidButton.addEventListener("click", function() {
+                const name = nameInput.value;
+                const bid = parseFloat(bidInput.value);
+
+                if (isNaN(bid)) {
+                    resultMessage.textContent = "Please enter a valid bid amount.";
+                } else if (bid <= highestBid) {
+                    resultMessage.textContent = "Your bid must be higher than the current highest bid.";
+                } else {
+                    highestBid = bid;
+                    winningBidder = name;
+                    resultMessage.textContent = `Congratulations, ${name}! You are the highest bidder with a bid of $${bid}.`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
